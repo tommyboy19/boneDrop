@@ -69,7 +69,7 @@ void setup() {
   Serial.begin(9600);
   //forum Code snippet #1
   attachInterrupt(1, pin_ISR, LOW);
-  //stepper.begin(RPM, MICROSTEPS);
+  stepper.begin(RPM, MICROSTEPS);
   // if using enable/disable on ENABLE pin (active LOW) instead of SLEEP uncomment next line
   // stepper.setEnableActiveState(LOW);
 
@@ -101,11 +101,10 @@ void pin_ISR() {
   //stateofLift = -1;                        //this might be too much ish for an interrupt
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
   //stepper.begin(RPM,MICROSTEPS);
-  //stepper.move(1000);
+    
   delay(5000);
   digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
   //stepper.disable();
- 
   
   
 }
