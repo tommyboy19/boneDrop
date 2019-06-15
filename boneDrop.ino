@@ -91,20 +91,25 @@ void loop() {
 
 void pin_ISR() {
 
-  //don't call Serial as re-entrance problems
-  //#ifdef debug
-  //Serial.println("in Interrupt");
-  //#endif
-  buttonState = digitalRead(buttonPin);
-  digitalWrite(ledPin, buttonState);
-  //check state
-  //stateofLift = -1;                        //this might be too much ish for an interrupt
+  static unsigned long last_interrupt_time = 0;
+  unsigned long interrupt_time = millis();
+ // If interrupts come faster than 200ms, assume it's a bounce and ignore
+ if (interrupt_time - last_interrupt_time > 200) 
+ {
+  //doItToIt
+
+  uint8_t SaveSREG = SREG;
+  cli();   // disable interrupts//
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  //stepper.begin(RPM,MICROSTEPS);
-    
-  delay(5000);
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  //stepper.disable();
+  stepper.move(1000);
+  SREG = SaveSREG;
   
+  //sei();   // enable interrupts
   
-}
+  //Serial.println("Valid Input");
+   
+ }
+  last_interrupt_time = interrupt_time;
+  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
+ //sei();   // enable interrupts
+} 
