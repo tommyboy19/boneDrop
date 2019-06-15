@@ -82,7 +82,10 @@ void loop() {
   //Serial.print("hey-0 debug mode active");
 #endif
   // energize coils - the motor will hold position
-  stepper.enable();//turn this on evertyime
+  //stepper.enable();//turn this on evertyime
+  
+  stepper.move(1000);
+  delay(5000);
 //Tom 
 }
 
@@ -96,8 +99,7 @@ void pin_ISR() {
   digitalWrite(ledPin, buttonState);
   //check state
   //stateofLift = -1;                        //this might be too much ish for an interrupt
-  //stepper.rotate(360);
-  stepper.move(1000);
+ 
   
   
 }
