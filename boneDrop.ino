@@ -83,7 +83,7 @@ void loop() {
 #endif
   // energize coils - the motor will hold position
   stepper.enable();//turn this on evertyime
-
+//Tom 
 }
 
 void pin_ISR() {
@@ -98,6 +98,6 @@ void pin_ISR() {
   //stateofLift = -1;                        //this might be too much ish for an interrupt
   //stepper.rotate(360);
   stepper.move(1000);
-  delay(5000);
+  
   
 }
