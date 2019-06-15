@@ -68,7 +68,7 @@ void setup() {
   // initialize serial communication:
   Serial.begin(9600);
   //forum Code snippet #1
-  attachInterrupt(1, pin_ISR, CHANGE);
+  attachInterrupt(1, pin_ISR, LOW);
   //stepper.begin(RPM, MICROSTEPS);
   // if using enable/disable on ENABLE pin (active LOW) instead of SLEEP uncomment next line
   // stepper.setEnableActiveState(LOW);
