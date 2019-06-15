@@ -73,6 +73,8 @@ void setup() {
   // if using enable/disable on ENABLE pin (active LOW) instead of SLEEP uncomment next line
   // stepper.setEnableActiveState(LOW);
 
+   pinMode(LED_BUILTIN, OUTPUT);
+
 
 }
 
@@ -83,9 +85,7 @@ void loop() {
 #endif
   // energize coils - the motor will hold position
   //stepper.enable();//turn this on evertyime
-  
-  stepper.move(1000);
-  delay(5000);
+
 //Tom 
 }
 
@@ -93,16 +93,18 @@ void pin_ISR() {
 
   //don't call Serial as re-entrance problems
   //#ifdef debug
-  Serial.println("in Interrupt");
+  //Serial.println("in Interrupt");
   //#endif
   buttonState = digitalRead(buttonPin);
   digitalWrite(ledPin, buttonState);
   //check state
   //stateofLift = -1;                        //this might be too much ish for an interrupt
-  stepper.begin(RPM,MICROSTEPS);
-  stepper.move(1000);
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  //stepper.begin(RPM,MICROSTEPS);
+  //stepper.move(1000);
   delay(5000);
-  stepper.disable();
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  //stepper.disable();
  
   
   
