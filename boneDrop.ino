@@ -83,57 +83,8 @@ void loop() {
 #endif
   // energize coils - the motor will hold position
   stepper.enable();//turn this on evertyime
- /* // read the state of the pushbutton value:
-  //buttonState = digitalRead(buttonPin); //NATE put in state change detection
-  //if (buttonState != lastState) {   //check state if different
-  //stepper.move(posState);
-  //stepper.disable();
-  //delay(200);
-  //forum Code Snippet #1
-  // read the pushbutton input pin:
-  buttonState = digitalRead(buttonPin);
-  // compare the buttonState to its previous state
-  if (buttonState != lastButtonState)
-  {
-#ifdef debug
-    Serial.println("if (buttonState != lastButtonState)");
-#endif
-    if (buttonState == LOW)
-    {
-#ifdef debug
-      Serial.println("buttonState == LOW && if (buttonState != lastButtonState)");
-#endif
-      // if the current state is LOW then the button
-      // went from off to on:
 
-      //nate 2019_0613 do motor stuff
-
-      //stepper.rotate(360); //spin that mother, use degree notation. whatever
-
-      //Tom motor Stuff start //
-#ifdef debug
-      Serial.println("tomMotorStuff && buttonState == LOW && if (buttonState != lastButtonState)");
-#endif
-      //stepper.move(-MOTOR_STEPS*MICROSTEPS); //make motor go back 360 degrees by microsteps
-
-
-      if (posState == 200) posState = -200;
-      else posState = 200;
-      //Tom motor stuff end
-    }
-    Serial.println("button pressed Dude");
-#ifdef debug
-    Serial.println("buttonPressed && buttonState == LOW && if (buttonState != lastButtonState)");
-#endif
-    digitalWrite(ledPin, !digitalRead(ledPin)); // toggle the output
-  }
-  delay(500);
-  lastButtonState = buttonState;*/
 }
-// save the current state as the last state,
-//for next time through the loop
-//
-//forum Code Snippet #1
 
 
 
@@ -151,5 +102,5 @@ void pin_ISR() {
   //check state
   //stateofLift = -1;                        //this might be too much ish for an interrupt
   //stepper.rotate(360);
-  //stepper.move(1000);
+  stepper.move(1000);
 }
