@@ -87,29 +87,63 @@ void loop() {
   //stepper.enable();//turn this on evertyime
 
 //Tom 
+ 
+/*
+  static unsigned long last_loop_time = 0;
+  unsigned long loop_time = millis();
+ // If interrupts come faster than 200ms, assume it's a bounce and ignore
+ if (loop - last_loop_time > 100) 
+ {
+   
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  stepper.move(1000);
+  
+ }
+ digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
+ // enable interrupts
+    
+ int buttonState = digitalRead(buttonPin);
+  // print out the state of the button:
+ Serial.println(buttonState);
+
+ last_loop_time = loop_time;
+ */
+ 
 }
 
+
+
+/*
+ * innerrupt, service interrupt, do stuff, return interrupts
+ */
 void pin_ISR() {
 
-  static unsigned long last_interrupt_time = 0;
-  unsigned long interrupt_time = millis();
+  volatile static unsigned long last_interrupt_time = 0;
+  volatile unsigned long interrupt_time = millis();
+  volatile uint8_t SaveSREG;
+  
+  SaveSREG = SREG;
+  cli();   // disable interrupts//
+
+  
  // If interrupts come faster than 200ms, assume it's a bounce and ignore
  if (interrupt_time - last_interrupt_time > 200) 
  {
   //doItToIt
 
-  uint8_t SaveSREG = SREG;
-  cli();   // disable interrupts//
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  stepper.move(1000);
-  SREG = SaveSREG;
+ 
   
-  //sei();   // enable interrupts
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  stepper.move(1);
+  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
+ 
   
   //Serial.println("Valid Input");
    
  }
   last_interrupt_time = interrupt_time;
-  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
+  sei();   // enable interrupts
+
+  
  //sei();   // enable interrupts
 } 
