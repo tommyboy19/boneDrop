@@ -68,7 +68,7 @@ void setup() {
   // initialize serial communication:
   Serial.begin(9600);
   //forum Code snippet #1
-  //attachInterrupt(1, pin_ISR, LOW);
+  attachInterrupt(1, pin_ISR, LOW);
   stepper.begin(RPM, MICROSTEPS);
   // if using enable/disable on ENABLE pin (active LOW) instead of SLEEP uncomment next line
   // stepper.setEnableActiveState(LOW);
@@ -87,24 +87,29 @@ void loop() {
   //stepper.enable();//turn this on evertyime
 
 //Tom 
- 
-  static unsigned long last_loop_time = 0;
-  unsigned long loop_time = millis();
+}
+
+void pin_ISR() {
+
+  static unsigned long last_interrupt_time = 0;
+  unsigned long interrupt_time = millis();
  // If interrupts come faster than 200ms, assume it's a bounce and ignore
- if (loop - last_loop_time > 100) 
+ if (interrupt_time - last_interrupt_time > 200) 
  {
-   
+  //doItToIt
+
+  uint8_t SaveSREG = SREG;
+  cli();   // disable interrupts//
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
   stepper.move(1000);
+  SREG = SaveSREG;
   
+  //sei();   // enable interrupts
+  
+  //Serial.println("Valid Input");
+   
  }
- digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
- // enable interrupts
-    
- int buttonState = digitalRead(buttonPin);
-  // print out the state of the button:
- Serial.println(buttonState);
-
- last_loop_time = loop_time;
- 
-}
+  last_interrupt_time = interrupt_time;
+  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
+ //sei();   // enable interrupts
+} 
