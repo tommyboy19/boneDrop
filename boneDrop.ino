@@ -68,7 +68,7 @@ void setup() {
   // initialize serial communication:
   Serial.begin(9600);
   //forum Code snippet #1
-  attachInterrupt(1, pin_ISR, LOW);
+ // attachInterrupt(1, pin_ISR, LOW);
   stepper.begin(RPM, MICROSTEPS);
   // if using enable/disable on ENABLE pin (active LOW) instead of SLEEP uncomment next line
   // stepper.setEnableActiveState(LOW);
@@ -88,7 +88,7 @@ void loop() {
 
 //Tom 
  
-/*
+
   static unsigned long last_loop_time = 0;
   unsigned long loop_time = millis();
  // If interrupts come faster than 200ms, assume it's a bounce and ignore
@@ -107,15 +107,17 @@ void loop() {
  Serial.println(buttonState);
 
  last_loop_time = loop_time;
- */
+ 
  
 }
 
 
-
 /*
- * innerrupt, service interrupt, do stuff, return interrupts
+
+ * interrupt, service interrupt, do stuff, return interrupts
  */
+
+ /*
 void pin_ISR() {
 
   volatile static unsigned long last_interrupt_time = 0;
@@ -123,8 +125,7 @@ void pin_ISR() {
   volatile uint8_t SaveSREG;
   
   SaveSREG = SREG;
-  cli();   // disable interrupts//
-
+  noInterrupts();   // disable interrupts//
   
  // If interrupts come faster than 200ms, assume it's a bounce and ignore
  if (interrupt_time - last_interrupt_time > 200) 
@@ -142,8 +143,9 @@ void pin_ISR() {
    
  }
   last_interrupt_time = interrupt_time;
-  sei();   // enable interrupts
-
   
- //sei();   // enable interrupts
+
+  interrupts();
+
 } 
+*/
