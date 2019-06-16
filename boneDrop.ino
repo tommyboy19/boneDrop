@@ -91,7 +91,7 @@ void loop() {
 
   static unsigned long last_loop_time = 0;
   unsigned long loop_time = millis();
- // If interrupts come faster than 200ms, assume it's a bounce and ignore
+ // If input comes in faster than 200ms, assume it's a bounce and ignore
  if (loop - last_loop_time > 100) 
  {
    
@@ -100,7 +100,7 @@ void loop() {
   
  }
  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
- // enable interrupts
+ 
     
  int buttonState = digitalRead(buttonPin);
   // print out the state of the button:
