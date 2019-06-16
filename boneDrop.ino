@@ -12,8 +12,6 @@
 //int lastState;
 int posState;
 
-
-//forum Code snippet #1
 // this constant won't change:
 const int  buttonPin = 3;    // the pin that the pushbutton is attached to
 const int ledPin = 13;       // the pin that the LED is attached to
@@ -22,13 +20,8 @@ const int ledPin = 13;       // the pin that the LED is attached to
 volatile int buttonState = 0;
 //boolean buttonState = 0;         // current state of the button....voltaile int in example.
 boolean lastButtonState = 0;     // previous state of the button
-boolean stateOfLift;             //woohoo another state var
-//forum Code snippet #1
 
-  volatile byte state = LOW;  //interrupt state
-
-
-
+volatile byte state = LOW;  //interrupt state
 
 // Motor steps per revolution. Most steppers are 200 steps or 1.8 degrees/step
 #define MOTOR_STEPS 200
