@@ -87,6 +87,7 @@ void loop() {
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
   if (state != lastState) {
   stepper.move(100);
+  //check the motors state and flip this.
   }
  }
  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
